@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Gear List</title>
+    <meta charset="utf-8">
+    <script>const whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};</script>
+    <script src="https://wow.zamimg.com/widgets/power.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import { h, render } from "https://cdn.pika.dev/preact";
+      import htm from "https://unpkg.com/htm?module";
+
+      const html = htm.bind(h);
+
+      import App from "./src/components/app.js";
+      import Tooltips from "./src/components/tooltipContext.js";
+
+      render(
+        html`
+          <${Tooltips.Provider} value=${() => $WowheadPower.init()}>
+            <${App} />
+          </${Tooltips.Provider}>
+        `,
+        document.getElementById("root")
+      );
+
+      feather.replace();
+    </script>
+  </body>
+</html>
