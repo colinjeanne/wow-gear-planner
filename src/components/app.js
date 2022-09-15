@@ -25,11 +25,6 @@ export default function App() {
    */
   const [showObsolete, setShowObsolete] = useState(false);
 
-  /**
-   * @type {[boolean, (v: boolean) => void]}
-   */
-  const [debugStats, setDebugStats] = useState(false);
-
   const tabs = [];
   for (const [name, characterData] of Object.entries(characters)) {
     tabs.push({
@@ -41,7 +36,6 @@ export default function App() {
           sourceFilter=${sourceFilter}
           latestPhase=${latestPhase}
           showObsolete=${showObsolete}
-          debugStats=${debugStats}
         />
       `,
     });
@@ -56,12 +50,7 @@ export default function App() {
         onLatestPhaseChanged=${setLatestPhase}
         showObsolete=${showObsolete}
         onShowObsoleteChanged=${setShowObsolete}
-        debugStats=${debugStats}
-        onDebugStatsChanged=${setDebugStats}
       />
-      <div>
-        <a href="https://wowwiki-archive.fandom.com/wiki/Stat_comparison">Stat Comparison</a>
-      </div>
     </div>
     <${TabbedContainer} tabs=${tabs} defaultSelectedIndex=${0} />
   `;

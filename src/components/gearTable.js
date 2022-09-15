@@ -3,7 +3,6 @@ import { useContext, useLayoutEffect } from "https://cdn.pika.dev/preact/hooks";
 import htm from "https://unpkg.com/htm?module";
 
 import { isItemEquipped, isItemObsolete } from "../characters.js";
-import { getGearData } from "../databases.js";
 import * as xforms from "../itemListTransformations.js";
 import { slots } from "../types.js";
 import Tooltips from "./tooltipContext.js";
@@ -22,7 +21,6 @@ const html = htm.bind(h);
  * @property {string} sourceFilter
  * @property {number} latestPhase
  * @property {boolean} showObsolete
- * @property {boolean} debugStats
  */
 
 /**
@@ -71,26 +69,19 @@ export default function GearTable(props) {
       classList.push("obsolete");
     }
 
-    let gemsData = "";
-    if (isEquipped && props.characterData.equippedGems[item.item.slot]) {
-      gemsData = `&gems=${(props.characterData.equippedGems[item.item.slot] || []).join(":")}`;
-    }
-
     let requirement = undefined;
     if (item.item.subItem) {
-      requirement = html`<a href=${`https://tbc.wowhead.com/item=${item.item.subItem}`}></a>`;
+      requirement = html`<a href=${`https://www.wowhead.com/wotlk/item=${item.item.subItem}`}></a>`;
     } else if (item.item.source === "Badges of Justice") {
       requirement = item.item.cost;
     } else if (item.item.source === "Quests") {
-      requirement = html`<a href=${`https://tbc.wowhead.com/quest=${item.item.quest}`}></a>`;
+      requirement = html`<a href=${`https://www.wowhead.com/wotlk/quest=${item.item.quest}`}></a>`;
     }
-
-    const stats = getGearData(item.id);
 
     const row = html`
       <tr key=${item.id} class=${classList}>
         <td>
-          <a href=${`https://tbc.wowhead.com/item=${item.id}${gemsData}`}></a>
+          <a href=${`https://www.wowhead.com/wotlk/item=${item.id}`}></a>
         </td>
         <td>${item.rank}</td>
         <td>${slots[item.item.slot]}</td>
@@ -98,7 +89,6 @@ export default function GearTable(props) {
         <td>${item.item.source}</td>
         <td>${item.item.boss}</td>
         <td>${item.note}</td>
-        <td hidden=${!props.debugStats}>${stats ? JSON.stringify(stats) : undefined}</td>
       </tr>
     `;
 
@@ -116,7 +106,6 @@ export default function GearTable(props) {
           <th>Source</th>
           <th>Boss</th>
           <th>Note</th>
-          <th hidden=${!props.debugStats}>Stats</th>
         </tr>
       </thead>
       <tbody>
