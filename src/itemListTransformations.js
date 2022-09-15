@@ -11,7 +11,7 @@ import { getItemSourceData } from "./databases.js";
 
 /**
  * @typedef TransformedItem
- * @property {string | number} id
+ * @property {number} id
  * @property {number} rank
  * @property {Item} item
  * @property {string=} note
@@ -27,10 +27,16 @@ export function slottedItemsToTransformedItems(slottedItems) {
   for (const itemList of Object.values(slottedItems)) {
     let rank = 1;
     for (const notedItem of itemList) {
+      const item = getItemSourceData(notedItem.id);
+      if (!item) {
+        console.log(notedItem.id);
+        continue;
+      }
+
       transformed.push({
         id: notedItem.id,
         rank,
-        item: getItemSourceData(notedItem.id),
+        item,
         note: notedItem.note,
       });
 

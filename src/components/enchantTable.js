@@ -3,7 +3,6 @@ import { useContext, useLayoutEffect } from "https://cdn.pika.dev/preact/hooks";
 import htm from "https://unpkg.com/htm?module";
 
 import { isItemEquipped, isItemObsolete } from "../characters.js";
-import { getGearData } from "../databases.js";
 import * as xforms from "../itemListTransformations.js";
 import { slots } from "../types.js";
 import Tooltips from "./tooltipContext.js";
@@ -21,7 +20,6 @@ const html = htm.bind(h);
  * @property {CharacterData} characterData
  * @property {number} latestPhase
  * @property {boolean} showObsolete
- * @property {boolean} debugStats
  */
 
 /**
@@ -62,18 +60,15 @@ export default function EnchantTable(props) {
       classList.push("obsolete");
     }
 
-    const stats = getGearData(item.id);
-
     const row = html`
       <tr key=${item.id} class=${classList}>
         <td>
-          <a href=${`https://tbc.wowhead.com/item=${item.id}`}></a>
+          <a href=${`https://www.wowhead.com/wotlk/item=${item.id}`}></a>
         </td>
         <td>${item.rank}</td>
         <td>${slots[item.item.slot]}</td>
         <td>${item.item.source}</td>
         <td>${item.note}</td>
-        <td hidden=${!props.debugStats}>${stats ? JSON.stringify(stats) : undefined}</td>
       </tr>
     `;
 
@@ -89,7 +84,6 @@ export default function EnchantTable(props) {
           <th>Slot</th>
           <th>Source</th>
           <th>Note</th>
-          <th hidden=${!props.debugStats}>Stats</th>
         </tr>
       </thead>
       <tbody>

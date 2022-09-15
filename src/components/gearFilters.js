@@ -11,8 +11,6 @@ const html = htm.bind(h);
  * @property {(v: number) => void} onLatestPhaseChanged
  * @property {boolean} showObsolete
  * @property {(v: boolean) => void} onShowObsoleteChanged
- * @property {boolean} debugStats
- * @property {(v: boolean) => void} onDebugStatsChanged
  */
 
 /**
@@ -46,14 +44,6 @@ export default function GearFilters(props) {
         type="checkbox"
         onChange=${(/** @type {Event} */ ev) => props.onShowObsoleteChanged((/** @type {HTMLInputElement} */ (ev.target)).checked)}
         checked=${props.showObsolete}
-      ></input>
-    </label>
-    <label>
-      Debug stats:
-      <input
-        type="checkbox"
-        onChange=${(/** @type {Event} */ ev) => props.onDebugStatsChanged((/** @type {HTMLInputElement} */ (ev.target)).checked)}
-        checked=${props.debugStats}
       ></input>
     </label>
   `;
