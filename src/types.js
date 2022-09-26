@@ -25,32 +25,37 @@ export const slots = {
 /**
  * @typedef {(
  *  "Black Temple" |
- *  "Enchanting" |
- *  "Honor Hold" |
  *  "Hyjal Summit" |
- *  "Scale of the Sands" |
  *  "Sunwell Plateau" |
- *  "The Aldor" |
- *  "The Sha'tar" |
  *  "Zul'Aman"
- * )} InstancesAndRep
+ * )} Instance
+ *
+ * @typedef {(
+ *  "Honor Hold" |
+ *  "Scale of the Sands" |
+ *  "The Aldor" |
+ *  "The Sha'tar"
+ * )} Faction
  *
  * @typedef BaseItem
  * @property {1 | 2 | 3 | 4 | 5} phase
  * @property {Slot} slot
+ * @property {number=} subItem
  *
  * @typedef {BaseItem & { source: "Auction House" }} AuctionItem
  * @typedef {BaseItem & { source: "Badges of Justice", cost: number }} BadgeItem
  * @typedef {BaseItem & { source: "Crafting" }} CraftingItem
+ * @typedef {BaseItem & { source: "Instance", instance: Instance, boss?: string }} InstanceItem
  * @typedef {BaseItem & { source: "Quests", quest: number }} QuestItem
- * @typedef {BaseItem & { source: InstancesAndRep, subItem?: number, boss?: string }} InstanceItem
+ * @typedef {BaseItem & { source: "Reputation", faction: Faction }} ReputationItem
  *
  * @typedef {(
  *  AuctionItem |
  *  BadgeItem |
  *  CraftingItem |
  *  QuestItem |
- *  InstanceItem
+ *  InstanceItem |
+ *  ReputationItem
  * )} Item
  */
 

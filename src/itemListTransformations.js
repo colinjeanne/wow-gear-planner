@@ -5,7 +5,6 @@ import { getItemSourceData } from "./databases.js";
  * @typedef {import("./characters.js").NotedItemId} NotedItemId
  * @typedef {import("./characters.js").SlottedItems} SlottedItems
  * @typedef {import("./types.js").Item} Item
- * @typedef {import("./types.js").ItemData} ItemData
  * @typedef {import("./types.js").Slot} Slot
  */
 
